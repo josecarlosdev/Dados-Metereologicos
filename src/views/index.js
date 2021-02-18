@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function Metereologicos() {
+const  Metereologicos = () => {
 
 
     const [getCity, setGetcity] = useState([])
@@ -10,7 +10,7 @@ function Metereologicos() {
     const [city, setCity] = useState();
     const [listCity, setListCity] = useState([]);
 
-    function loadUf() {
+    const loadUf = () => {
         let url = 'https://servicodados.ibge.gov.br/';
         url = url + 'api/v1/localidades/estados';
         fetch(url)
@@ -20,7 +20,7 @@ function Metereologicos() {
                 setListUf([...data]);
             });
     }
-    function loadCity(id) {
+    const loadCity = (id) => {
         let url = 'https://servicodados.ibge.gov.br/api/v1/';
         url = url + `localidades/estados/${id}/municipios`;
         fetch(url)
@@ -47,11 +47,19 @@ function Metereologicos() {
         console.log(result)
     }
   
-
     useEffect(() => {
         load();
 
     }, [])
+    const LoadOnclick = ()=>{
+
+            setTimeout(() =>{
+                alert('Busca realizada com sucesso')
+                window.location.reload();
+            },1000)
+        
+    }
+
     return (
         <div className="container">
             <form action="http://localhost:3002/cidades" method="post">
@@ -91,7 +99,10 @@ function Metereologicos() {
                         <div className="col-md-3">
                                     <br/>
 
-                            <button type='submit' className="btn btn-dark"
+                            <button 
+                                type='submit' 
+                                className="btn btn-dark"
+                                onClick = {LoadOnclick}
                                
                             >Buscar</button>
                         </div>
